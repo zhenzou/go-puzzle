@@ -33,10 +33,22 @@ func NewParent() Parent {
 	}.Parent
 }
 
+func PrintlnFields(i interface{}) {
+	typ := reflect.TypeOf(i)
+	if typ.Kind() == reflect.Struct {
+		num := typ.NumField()
+		for i := 0; i < num; i++ {
+			field := typ.Field(i)
+			println(field.Type.Name(), ":", field.Name)
+		}
+	}
+}
+
 func main() {
 	child := &Child{
 		Parent: Parent{Name: "test"},
 		Sex:    0,
 	}
 	Println2(*child)
+	PrintlnFields(*child)
 }
