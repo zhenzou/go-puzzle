@@ -1,6 +1,8 @@
 package main
 
 import (
+	"reflect"
+
 	"go-puzzle/util"
 )
 
@@ -25,24 +27,33 @@ func TT() []Super {
 }
 
 // append相关操作
-func T_Append() {
-	ints := []int{1, 2, 3}
-	ints2 := ints[0:1]
-	println(len(ints2))
-	//ints2 = append(ints2, 4, 5, 6)
-	// 上面这种同时append多个值的方式会直接导致引用的array改变，所以ints不会改变
-	ints2 = append(ints2, 4)
-	ints2 = append(ints2, 5)
-	ints2 = append(ints2, 6)
-	println(util.ToJson(ints))
-	println(util.ToJson(ints2))
+func Append() {
+	arr1 := []int{1, 2, 3}
+	arr2 := arr1[0:1]
+	println(len(arr2))
+	// 这种append多个值的直接导致引用的array发生resize操作，后续修改的是新的array，所以ints不会改变
+	arr2 = append(arr2, 4, 5, 6)
+
+	println(reflect.DeepEqual(arr1, arr1))
+
+	arr1 = []int{1, 2, 3}
+	arr2 = arr1[0:1]
+	arr2 = append(arr2, 4)
+	arr2 = append(arr2, 5)
+	arr2 = append(arr2, 6)
+
+	println(reflect.DeepEqual(arr1, arr2))
+
+	println(util.ToJson(arr1))
+	println(util.ToJson(arr2))
+}
+
+type Person struct {
+	Name string
 }
 
 // []*T指针相关操作
-func T_Pointer() {
-	type Person struct {
-		Name string
-	}
+func TraversePtrSlice() {
 	ps := []*Person{{"fuck"}, {"happy"}, {"test"}}
 	for _, p := range ps {
 		p.Name = "haha"
@@ -56,6 +67,18 @@ func T_Pointer() {
 	println(p.Name)
 }
 
+func TraverseStructSlice() {
+	ps := []Person{{"fuck"}, {"happy"}, {"test"}}
+	for _, p := range ps {
+		p.Name = "haha"
+	}
+	for _, p := range ps {
+		//不会修改ps中元素的值，copy
+		println(p.Name)
+	}
+}
+
 func main() {
-	T_Append()
+	Append()
+	TraversePtrSlice()
 }
