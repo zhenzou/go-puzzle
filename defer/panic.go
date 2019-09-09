@@ -156,8 +156,8 @@ func main() {
 	//println(f2())
 	//println(explain3())
 	//println("fuck")
-	//panicdefer()
-	DeferPanic()
+	panicdefer()
+	//DeferPanic()
 	//TestDeferPanic()
 	//DeferFunc()
 }
