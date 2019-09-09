@@ -6,9 +6,22 @@ type Parent struct {
 	Name string
 }
 
+func (p *Parent) Say1() {
+	println("parent:", p.Name, "1")
+	p.Say2()
+}
+
+func (p *Parent) Say2() {
+	println("parent:", p.Name, "2")
+}
+
 type Child struct {
 	Parent
 	Sex int
+}
+
+func (c *Child) Say2() {
+	println("child ", c.Name, " 2")
 }
 
 // 不能接受Child类型
@@ -21,7 +34,7 @@ func Println2(i interface{}) {
 		Println(p)
 	} else {
 		typ := reflect.TypeOf(i)
-		println(typ.Name(), "is not type Parent")
+		println(typ.Name(), " is not type Parent")
 	}
 }
 
@@ -39,7 +52,7 @@ func PrintlnFields(i interface{}) {
 		num := typ.NumField()
 		for i := 0; i < num; i++ {
 			field := typ.Field(i)
-			println(field.Type.Name(), ":", field.Name)
+			println(field.Name, ":", field.Type.Name())
 		}
 	}
 }
@@ -51,4 +64,5 @@ func main() {
 	}
 	Println2(*child)
 	PrintlnFields(*child)
+	child.Say1()
 }
