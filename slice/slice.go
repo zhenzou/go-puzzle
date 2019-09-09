@@ -78,7 +78,18 @@ func TraverseStructSlice() {
 	}
 }
 
+func Make() {
+	// 只有参数，同时声明了容量以及长度，会初始化为0
+	s := make([]int, 5)
+	s = append(s, 1, 2, 3)
+	println(util.ToJson(s))
+	s1 := make([]int, 0, 5)
+	s1 = append(s1, 1, 2, 3)
+	println(util.ToJson(s1))
+}
+
 func main() {
+	Make()
 	Append()
 	TraversePtrSlice()
 }
