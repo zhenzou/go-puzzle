@@ -18,6 +18,8 @@ func (person *Person) NativeType() reflect.Type {
 	return reflect.TypeOf("fuck")
 }
 
+// 结论：
+// reflect.New return ptr to type
 func main() {
 
 	typ := reflect.TypeOf(&Person{})
@@ -28,6 +30,13 @@ func main() {
 
 	p, ok := value.Interface().(Wrapper)
 	if ok {
+		// not ok
 		println("name:", p.NativeType())
+	}
+
+	p, ok = value.Elem().Interface().(Wrapper)
+	if ok {
+		// ok
+		println("name:", p.NativeType().String())
 	}
 }
