@@ -49,7 +49,7 @@ func explain3() (r int) {
 	return 1
 }
 
-func f() {
+func deferf() {
 	i := 10
 	defer func(i int) {
 		println(2)

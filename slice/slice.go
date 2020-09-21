@@ -88,8 +88,18 @@ func Make() {
 	println(util.ToJson(s1))
 }
 
+func AppendInRange() {
+	v := []int{1, 2, 3}
+	// range 是一种语法糖，类似于
+	// for i:0;i<len(v);i++
+	for i := range v {
+		v = append(v, i)
+	}
+}
+
 func main() {
 	Make()
 	Append()
 	TraversePtrSlice()
+	AppendInRange()
 }

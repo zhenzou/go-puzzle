@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Animal interface {
 	Bark()
@@ -49,7 +51,8 @@ func main() {
 	Bark(cp)  // (7)
 	Bark(&c)  // (8)，这里必须取指针
 
+	//runtime.BlockProfile()
 	getDog().Bark() // (9)
-	// 注意addressable
-	getCat().Bark() // (10)
+	// 注意addressable，函数返回值是 not addressable
+	//getCat().Bark() // (10)
 }
