@@ -25,6 +25,5 @@ func main() {
 	p := Person{}
 
 	println(reflect.TypeOf(p).Implements(wrapperType))
-
 	println(reflect.PtrTo(reflect.TypeOf(p)).Implements(wrapperType))
 }
